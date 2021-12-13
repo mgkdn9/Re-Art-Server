@@ -3,7 +3,7 @@ const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
 
-// pull in Mongoose model for tags
+// pull in Mongoose model for pieces
 const Piece = require('../models/piece')
 
 // this is a collection of methods that help us detect situations when we need
@@ -19,30 +19,41 @@ const removeBlanks = require('../../lib/remove_blank_fields')
 // // passing this as a second argument to `router.<verb>` will make it
 // // so that a token MUST be passed for that route to be available
 // // it will also set `req.user`
-// const requireToken = passport.authenticate('bearer', { session: false })
+const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()
 
 
-// INDEX
-// GET /tags
+// INDEX all pieces
+// GET /pieces
 router.get('/pieces', (req, res, next) => {
 	Piece.find()
 		.then((pieces) => {
-			// `tags` will be an array of Mongoose documents
+			// `pieces` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
 			// apply `.toObject` to each one
 			return pieces.map((piece) => piece.toObject())
 		})
-		// respond with status 200 and JSON of the tags
+		// respond with status 200 and JSON of the pieces
 		.then((pieces) => res.status(200).json({ pieces: pieces }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// SHOW one piece
+// GET /pieces
+router.get('/pieces/:id', (req, res, next) => {
+	Piece.findById(req.params.id)
+		.then(handle404)
+		// respond with status 200 and JSON of the pieces
+		.then((piece) => res.status(200).json({ piece: piece.toObject() }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 
 
 // CREATE
-// POST /tags
+// POST /pieces
 router.post('/pieces', (req, res, next) => {
 
 	Piece.create(req.body.piece)
@@ -57,7 +68,7 @@ router.post('/pieces', (req, res, next) => {
 })
 
 // DESTROY
-// DELETE /tags/5a7db6c74d55bc51bdf39793
+// DELETE /pieces/5a7db6c74d55bc51bdf39793
 router.delete('/pieces/:id', (req, res, next) => {
 	Piece.findById(req.params.id)
 		.then(handle404)
@@ -66,6 +77,29 @@ router.delete('/pieces/:id', (req, res, next) => {
 			piece.deleteOne()
 		})
 		// send back 204 and no content if the deletion succeeded
+		.then(() => res.sendStatus(204))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// UPDATE
+// PATCH /pieces/5a7db6c74d55bc51bdf39793
+router.patch('/pieces/:id', requireToken, removeBlanks, (req, res, next) => {
+	// if the client attempts to change the `owner` property by including a new
+	// owner, prevent that by deleting that key/value pair
+	// delete req.body.piece.owner
+
+	Piece.findById(req.params.id)
+		.then(handle404)
+		.then((piece) => {
+			// pass the `req` object and the Mongoose record to `requireOwnership`
+			// it will throw an error if the current user isn't the owner
+			// requireOwnership(req, piece)
+
+			// pass the result of Mongoose's `.update` to the next `.then`
+			return piece.updateOne(req.body.piece)
+		})
+		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
 		// if an error occurs, pass it to the handler
 		.catch(next)
