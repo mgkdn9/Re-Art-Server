@@ -16,7 +16,7 @@ const profileSchema = new mongoose.Schema(
       required: true
     },
     creditCard: {
-      type: integer,
+      type: Number,
       required: true
     },
     tags: {
