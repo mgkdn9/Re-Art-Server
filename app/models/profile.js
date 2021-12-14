@@ -39,7 +39,7 @@ const profileSchema = new mongoose.Schema(
     cartedPiece2Id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Piece'
-    },
+    }
   }
 )
 
