@@ -40,6 +40,9 @@ const profileSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Piece'
     },
+    isSubscribed: {
+      type: Boolean,
+    }
   }
 )
 
