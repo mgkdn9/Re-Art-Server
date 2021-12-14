@@ -23,7 +23,6 @@ const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()
 
-
 // INDEX all pieces
 // GET /pieces
 router.get('/pieces', (req, res, next) => {
@@ -50,7 +49,6 @@ router.get('/pieces/:id', (req, res, next) => {
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
-
 
 // CREATE
 // POST /pieces
@@ -104,8 +102,5 @@ router.patch('/pieces/:id', requireToken, removeBlanks, (req, res, next) => {
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
-
-
-
 
 module.exports = router
