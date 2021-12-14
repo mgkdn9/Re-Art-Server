@@ -51,6 +51,19 @@ router.get('/profiles/:id', (req, res, next) => {
 		.catch(next)
 })
 
+// SHOW one profile by userid
+// GET /profiles
+router.get('/profiles/user/:userId', (req, res, next) => {
+	Profile.find({ 'userId': req.params.userId })
+		.then(handle404)
+		// respond with status 200 and JSON of the profiles
+		.then((profile) => {
+			res.status(200).json({ profile: profile})
+		})
+		// if an error occurs, pass it to the handler
+		.catch(next)
+	})
+
 
 // CREATE
 // POST /profile
