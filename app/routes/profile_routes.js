@@ -115,7 +115,7 @@ router.patch('/profiles/:id', requireToken, removeBlanks, (req, res, next) => {
 			// requireOwnership(req, profile)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
-			return profile.updateOne(req.body)
+			return profile.updateOne(req.body.profile)
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
