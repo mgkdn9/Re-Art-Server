@@ -28,6 +28,7 @@ const router = express.Router()
 // GET /profile
 router.get('/profiles', (req, res, next) => {
 	Profile.find()
+		.populate('tags')
 		.then((profile) => {
 			// `profile` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -44,6 +45,7 @@ router.get('/profiles', (req, res, next) => {
 // GET /profiles
 router.get('/profiles/:id', (req, res, next) => {
 	Profile.findById(req.params.id)
+		.populate('tags')
 		.then(handle404)
 		// respond with status 200 and JSON of the profiles
 		.then((profile) => res.status(200).json({ profile: profile.toObject() }))
@@ -55,6 +57,7 @@ router.get('/profiles/:id', (req, res, next) => {
 // GET /profiles
 router.get('/profiles/user/:userId', (req, res, next) => {
 	Profile.find({ 'userId': req.params.userId })
+		.populate('tags')
 		.then(handle404)
 		// respond with status 200 and JSON of the profiles
 		.then((profile) => {
@@ -112,7 +115,7 @@ router.patch('/profiles/:id', requireToken, removeBlanks, (req, res, next) => {
 			// requireOwnership(req, profile)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
-			return profile.updateOne(req.body.profile)
+			return profile.updateOne(req.body)
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
