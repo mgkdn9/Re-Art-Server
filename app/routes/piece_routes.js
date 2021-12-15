@@ -54,10 +54,10 @@ router.get('/pieces/:id', (req, res, next) => {
 // POST /pieces
 router.post('/pieces', (req, res, next) => {
 
-	Piece.create(req.body.piece)
+	Piece.create(req.body)
 		// respond to succesful `create` with status 201 and JSON of new "tag"
 		.then((piece) => {
-			res.status(201).json({ piece: piece.toObject() })
+			res.status(201).json(piece)
 		})
 		// if an error occurs, pass it off to our error handler
 		// the error handler needs the error message and the `res` object so that it
