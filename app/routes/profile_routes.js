@@ -68,9 +68,10 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 	})
 
 
-// CREATE
+// CREATE edit night 12/15/21
 // POST /profile
 router.post('/profiles', (req, res, next) => {
+<<<<<<< HEAD
 
 	Profile.create(req.body)
 		// respond to succesful `create` with status 201 and JSON of new "tag"
@@ -81,6 +82,17 @@ router.post('/profiles', (req, res, next) => {
 		// the error handler needs the error message and the `res` object so that it
 		// can send an error message back to the client
 		.catch(next)
+=======
+    Profile.create(req.body.profile)
+        // respond to succesful `create` with status 201 and JSON of new "tag"
+        .then((profile) => {
+            res.status(201).json({ profile: profile.toObject() })
+        })
+        // if an error occurs, pass it off to our error handler
+        // the error handler needs the error message and the `res` object so that it
+        // can send an error message back to the client
+        .catch(next)
+>>>>>>> upstream/development
 })
 
 // DESTROY
@@ -102,6 +114,27 @@ router.delete('/profiles/:id', (req, res, next) => {
 
 // UPDATE
 // PATCH /profiles/5a7db6c74d55bc51bdf39793
+router.patch('/profiles/user/:userId', requireToken, removeBlanks, (req, res, next) => {
+	// if the client attempts to change the `owner` property by including a new
+	// owner, prevent that by deleting that key/value pair
+	// delete req.body.profile.owner
+	Profile.find({ 'userId': req.params.userId })
+		.then(handle404)
+		.then((profile) => {
+			// pass the `req` object and the Mongoose record to `requireOwnership`
+			// it will throw an error if the current user isn't the owner
+			// requireOwnership(req, profile)
+			// pass the result of Mongoose's `.update` to the next `.then`
+			return Profile.updateOne(req.body)
+		})
+		// if that succeeded, return 204 and no JSON
+		.then(() => res.sendStatus(204))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// UPDATE
+// PATCH for isSubscribed from checkout
 router.patch('/profiles/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
