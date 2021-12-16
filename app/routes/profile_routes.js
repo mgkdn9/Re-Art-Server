@@ -72,7 +72,7 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 // POST /profile
 router.post('/profiles', (req, res, next) => {
 
-	Profile.createOrCreate(req.body)
+	Profile.create(req.body)
 		// respond to succesful `create` with status 201 and JSON of new "tag"
 		.then((profile) => {
 			res.status(201).json({ profile: profile.toObject() })
