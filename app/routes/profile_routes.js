@@ -65,19 +65,18 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 	})
 
 
-// CREATE
+// CREATE edit night 12/15/21
 // POST /profile
 router.post('/profiles', (req, res, next) => {
-
-	Profile.createOrCreate(req.body)
-		// respond to succesful `create` with status 201 and JSON of new "tag"
-		.then((profile) => {
-			res.status(201).json({ profile: profile.toObject() })
-		})
-		// if an error occurs, pass it off to our error handler
-		// the error handler needs the error message and the `res` object so that it
-		// can send an error message back to the client
-		.catch(next)
+    Profile.create(req.body.profile)
+        // respond to succesful `create` with status 201 and JSON of new "tag"
+        .then((profile) => {
+            res.status(201).json({ profile: profile.toObject() })
+        })
+        // if an error occurs, pass it off to our error handler
+        // the error handler needs the error message and the `res` object so that it
+        // can send an error message back to the client
+        .catch(next)
 })
 
 // DESTROY
