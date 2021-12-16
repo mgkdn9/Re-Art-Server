@@ -28,6 +28,7 @@ const router = express.Router()
 // GET /profile
 router.get('/profiles', (req, res, next) => {
 	Profile.find()
+		.populate('tags')
 		.then((profile) => {
 			// `profile` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -44,6 +45,7 @@ router.get('/profiles', (req, res, next) => {
 // GET /profiles
 router.get('/profiles/:id', (req, res, next) => {
 	Profile.findById(req.params.id)
+		.populate('tags')
 		.then(handle404)
 		// respond with status 200 and JSON of the profiles
 		.then((profile) => res.status(200).json({ profile: profile.toObject() }))
@@ -55,6 +57,7 @@ router.get('/profiles/:id', (req, res, next) => {
 // GET /profiles
 router.get('/profiles/user/:userId', (req, res, next) => {
 	Profile.find({ 'userId': req.params.userId })
+		.populate('tags')
 		.then(handle404)
 		// respond with status 200 and JSON of the profiles
 		.then((profile) => {
@@ -68,15 +71,16 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 // CREATE edit night 12/15/21
 // POST /profile
 router.post('/profiles', (req, res, next) => {
-    Profile.create(req.body.profile)
-        // respond to succesful `create` with status 201 and JSON of new "tag"
-        .then((profile) => {
-            res.status(201).json({ profile: profile.toObject() })
-        })
-        // if an error occurs, pass it off to our error handler
-        // the error handler needs the error message and the `res` object so that it
-        // can send an error message back to the client
-        .catch(next)
+
+	Profile.create(req.body)
+		// respond to succesful `create` with status 201 and JSON of new "tag"
+		.then((profile) => {
+			res.status(201).json({ profile: profile.toObject() })
+		})
+		// if an error occurs, pass it off to our error handler
+		// the error handler needs the error message and the `res` object so that it
+		// can send an error message back to the client
+		.catch(next)
 })
 
 // DESTROY
@@ -132,7 +136,7 @@ router.patch('/profiles/:id', requireToken, removeBlanks, (req, res, next) => {
 			// requireOwnership(req, profile)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
-			return profile.updateOne(req.body.profile)
+			return profile.updateOne(req.body)
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
