@@ -55,7 +55,8 @@ router.get('/pieces/profile/:profileId', (req, res, next) => {
 	.then((profile) => {
 		tagIds = profile.tags
 		// res.status(200).json({ tagIds: tagIds.toObject() })// This proved that we are getting tags
-		Piece.find({ 'tags':tagIds })
+		Piece.find({'tags': {$in: tagIds } })//This works just not dynamic
+		// Piece.find({$or:[{'tags':tagIds[0]}, {'tags':tagIds[1]}]  })//This works just not dynamic
 		// Piece.find({ "tags":["61b7af937a8985ab2413ebfe"] })
 		// Piece.find({ 'title':'Cloud' })
 		.then(handle404)
