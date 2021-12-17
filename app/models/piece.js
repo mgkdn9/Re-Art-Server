@@ -16,7 +16,7 @@ const pieceSchema = new mongoose.Schema(
         },
         isAssigned: {
             type: Boolean,
-            required: true,
+            allowNull: true
         },
         tags: {
             type: [mongoose.Schema.Types.ObjectId],
@@ -25,11 +25,11 @@ const pieceSchema = new mongoose.Schema(
         },
         isPurchased: {
             type: Boolean,
-            required: true
+            allowNull: true
         },
         price: {
             type: Number,
-            required: true,
+            allowNull: true
         },
         imgUrl: {
             type: String,

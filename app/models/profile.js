@@ -15,10 +15,6 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    creditCard: {
-      type: Number,
-      required: true
-    },
     tags: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: 'Tag',
@@ -40,6 +36,9 @@ const profileSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Piece'
     },
+    isSubscribed: {
+      type: Boolean,
+    }
   }
 )
 
