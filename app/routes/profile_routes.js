@@ -23,7 +23,6 @@ const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()
 
-
 // INDEX all profile
 // GET /profile
 router.get('/profiles', (req, res, next) => {
@@ -67,6 +66,7 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 		.catch(next)
 	})
 
+// CREATE
 
 // CREATE edit night 12/15/21
 // POST /profile
@@ -97,8 +97,6 @@ router.delete('/profiles/:id', (req, res, next) => {
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
-
-
 
 // UPDATE
 // PATCH /profiles/5a7db6c74d55bc51bdf39793
