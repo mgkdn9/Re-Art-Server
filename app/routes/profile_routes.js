@@ -61,7 +61,7 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 		.then(handle404)
 		// respond with status 200 and JSON of the profiles
 		.then((profile) => {
-			res.status(200).json({ profile: profile})
+			res.status(200).json({profile})
 		})
 		// if an error occurs, pass it to the handler
 		.catch(next)
@@ -70,7 +70,7 @@ router.get('/profiles/user/:userId', (req, res, next) => {
 
 // CREATE edit night 12/15/21
 // POST /profile
-router.post('/profiles', (req, res, next) => {
+router.post('/profiles', requireToken, removeBlanks, (req, res, next) => {
 
 	Profile.create(req.body)
 		// respond to succesful `create` with status 201 and JSON of new "tag"
