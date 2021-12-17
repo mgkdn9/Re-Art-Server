@@ -5,6 +5,8 @@ const passport = require('passport')
 
 // pull in Mongoose model for pieces
 const Piece = require('../models/piece')
+// pull in Mongoose model for profile
+const Profile = require('../models/profile')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -16,6 +18,7 @@ const handle404 = customErrors.handle404
 // this is middleware that will remove blank fields from `req.body`, e.g.
 // { tag: { title: '', text: 'foo' } } -> { tag: { text: 'foo' } }
 const removeBlanks = require('../../lib/remove_blank_fields')
+const { Router } = require('express')
 // // passing this as a second argument to `router.<verb>` will make it
 // // so that a token MUST be passed for that route to be available
 // // it will also set `req.user`
@@ -27,6 +30,7 @@ const router = express.Router()
 // GET /pieces
 router.get('/pieces', (req, res, next) => {
 	Piece.find()
+		// .populate('tags')
 		.then((pieces) => {
 			// `pieces` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -37,6 +41,29 @@ router.get('/pieces', (req, res, next) => {
 		.then((pieces) => res.status(200).json({ pieces: pieces }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
+})
+
+// INDEX pieces matching profile tags
+// GET /pieces/profile
+router.get('/pieces/profile/:profileId', (req, res, next) => {
+	let tagIds = []// Array holding profile's tagIds
+	// let tagNames = []// Array holding profile's tagNames
+	Profile.findById(req.params.profileId)
+	// .populate('tags')
+	.then(handle404)
+	// respond with status 200 and JSON of the profiles
+	.then((profile) => {
+		tagIds = profile.tags
+		// res.status(200).json({ tagIds: tagIds.toObject() })// This proved that we are getting tags
+		Piece.find({ 'tags':tagIds })
+		// Piece.find({ "tags":["61b7af937a8985ab2413ebfe"] })
+		// Piece.find({ 'title':'Cloud' })
+		.then(handle404)
+		.then(pieces => res.status(200).json({ pieces: pieces}))
+		.catch(next)
+	})
+	// if an error occurs, pass it to the handler
+	.catch(next)
 })
 
 // SHOW one piece
