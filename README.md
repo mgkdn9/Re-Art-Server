@@ -1,6 +1,7 @@
 ## Local Setup
 
-- this Part 2 of local deployment, if you have not completed Part 1 (the client side), please start with Part 1 of local deployment [here](https://github.com/isaac8069/Re-Art-Client)
+#### This Part 2 of local deployment, the server side. If you have not completed Part 1 (the client side), please start with Part 1 of local deployment [here](https://github.com/isaac8069/Re-Art-Client)
+
 - Install the LTS version of node.js from [here](https://nodejs.org/en/)
 - In a terminal, clone this repo
 
