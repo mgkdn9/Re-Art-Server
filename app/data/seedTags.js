@@ -19,15 +19,16 @@ const tags = [
 
 //Drop existing tags
 Tag.db.dropCollection('tags', function(err, result){
-  // let count = 0 Don't need because we don't need to disconnect
+  let count = 0 //Don't need because we don't need to disconnect
   // After we drop the tags, we add them right back
   // Wouldn't be efficient at scale
   for( let i = 0; i < tags.length; i++){
     tags[i].save(function(err, result) {
-      // count++
-      // if( count === tags.length ){
-      //   exit()
-      // }
+      count++
+      if( count === tags.length ){
+        // exit()
+        require('./seedPieces')
+      }
     })
   }
 })
