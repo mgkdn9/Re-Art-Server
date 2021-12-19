@@ -6,6 +6,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const stripe = require('stripe')('sk_test_51K6PZKAPJKSXew76K3l4ifK78SkwZVoQilqvDZBapaR2r9DAD13RJoN3F4NIZdGD2HHobjE57APZAi6dEVxh9vDZ00isnRXpTm');
 
+// seed data
+require('./app/data/seedTags')
 
 // require route files
 const exampleRoutes = require('./app/routes/example_routes')
@@ -131,7 +133,7 @@ app.post('/pay', async (request, response) => {
 // stripe request handlers
 app.get('/', (req, res) => {
 	res.send('Stripe Integration Server');
-  });
+});
 
 // run API on designated port (4741 in this case)
 app.listen(port, () => {

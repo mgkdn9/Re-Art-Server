@@ -8,7 +8,7 @@ const Tag = require('../models/tag')
     "description": "The painting is credited with inspiring the name of the Impressionist movement. mpression, Sunrise depicts the port of Le Havre, Monet's hometown.",
     "artist": "Claude Monet",
     "tags": ["61b79b4c9c25695d79ddf829"],
-    "imgUrl": "https://https://www.claude-monet.com/images/paintings/impression-sunrise.jpg.britannica.com/w:690,h:388,c:crop/78/43678-050-F4DC8D93/Starry-Night-canvas-Vincent-van-Gogh-New-1889.jpg"
+    "imgUrl": "https://www.claude-monet.com/images/paintings/impression-sunrise.jpg"
 },
 {
     "title": "The Basket of Apples",
@@ -22,7 +22,7 @@ const Tag = require('../models/tag')
     "description": "Paris Street; Rainy Day  is a large 1877 oil painting by the French artist Gustave Caillebotte (1848–1894), and is his best known work. It shows a number of individuals walking through the Place de Dublin, then known as the Carrefour de Moscou, at an intersection to the east of the Gare Saint-Lazare in north Paris.",
     "artist": "Gustave Caillebotte",
     "tags": ["61b79b4c9c25695d79ddf829"],
-    "imgUrl": "https://www.artic.edu/iiif/2/52ac8996-3460-cf71-cb42-5c4d0aa29b74/full/1686,/0/default.jpg"
+    "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtJnpP8IF6x7-Usm-59dxNfyhCAt2jbAaAsw&usqp=CAU"
 },
 {
     "title": "Bal du moulin de la Galette",
@@ -75,14 +75,14 @@ const Tag = require('../models/tag')
     "description": `"My aim is to have a picture that appears one way from a distance--almost like a cosmology, city or universe from afar--but then when you approach the work, the overall image shatters into numerous other pictures stories and events...My initial impulse and investigation was to try and develop, through drawing, a language that could communicate different types of narratives and build a cityscape, each mark having a character, a modus operandi of social behavior. As they continued to grow and develop in the drawing I wanted to see them layered; to build a different kind of dimension of space and time into the narratives."`,
     "artist": "Julie Mehretu",
     "tags": ["61b79b4c9c25695d79ddf829"],
-    "imgUrl": "https://i1.wp.com/www.culturetype.com/wp-content/uploads/2016/10/kjm_dz_studio.jpg?ssl=1"
+    "imgUrl": "https://i.imgur.com/qNWdGs6.jpg"
 },
 {
     "title": "Untitled (Studio)",
     "description": "Untitled (Studio) is in part about that discovery of a Black artist’s workshop—a place of labor where an allegorical catalogue of all modes of art making is on display. At the same time, it is also a majestic ode to the job of the artist, the history of painting, and the multiple possibilities that still pump through the heart of its practice.",
     "artist": "Kerry James Marshall",
     "tags": ["61b79b4c9c25695d79ddf829"],
-    "imgUrl": "https://www.artic.edu/iiif/2/52ac8996-3460-cf71-cb42-5c4d0aa29b74/full/1686,/0/default.jpg"
+    "imgUrl": "https://i1.wp.com/www.culturetype.com/wp-content/uploads/2016/10/kjm_dz_studio.jpg?ssl=1"
 },
 {
     "title": "The Longest Night",
