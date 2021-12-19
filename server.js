@@ -8,6 +8,7 @@ const stripe = require('stripe')('sk_test_51K6PZKAPJKSXew76K3l4ifK78SkwZVoQilqvD
 
 // seed data
 require('./app/data/seedTags')
+// require('./app/data/seedPieces')
 
 // require route files
 const exampleRoutes = require('./app/routes/example_routes')
