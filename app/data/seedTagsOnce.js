@@ -7,25 +7,13 @@ mongoose.connect(db)
 
 const tags = [
   new Tag({
-    name: 'Light'
+    name: 'Impressionist'
   }),
   new Tag({
-    name: 'Dark'
+    name: 'Pop'
   }),
   new Tag({
-    name: 'Surrealism'
-  }),
-  new Tag({
-    name: 'Pointillism'
-  }),
-  new Tag({
-    name: 'Colorful'
-  }),
-  new Tag({
-    name: 'Statues'
-  }),
-  new Tag({
-    name: 'Paintings'
+    name: 'Contemporary'
   })
 ]
 
