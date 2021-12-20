@@ -29,6 +29,7 @@ const router = express.Router()
 // INDEX all pieces
 // GET /pieces
 router.get('/pieces', (req, res, next) => {
+	console.log("PIECES SHOW")
 	Piece.find()
 		// .populate('tags')
 		.then((pieces) => {
