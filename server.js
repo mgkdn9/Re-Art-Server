@@ -1,3 +1,4 @@
+require('dotenv').config()
 // require necessary NPM packages
 const express = require('express')
 const mongoose = require('mongoose')
