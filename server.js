@@ -50,9 +50,14 @@ const app = express()
 
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
-app.use(
-	cors()
-)
+// app.use(
+// 	cors()
+// )
+app.use(cors({
+  origin: 'https://mgkdn9.github.io', // Allow GitHub Pages frontend
+  credentials: true, // Optional: if you use cookies/auth
+}));
+
 
 // define port for API to run on
 // adding PORT= to your env file will be necessary for deployment
