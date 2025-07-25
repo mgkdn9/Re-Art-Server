@@ -53,9 +53,15 @@ const app = express()
 // app.use(
 // 	cors()
 // )
+console.log('CORS ENV:', process.env.CLIENT_ORIGIN);
+
 app.use(cors({
   origin: 'https://mgkdn9.github.io', // Allow GitHub Pages frontend
   credentials: true, // Optional: if you use cookies/auth
+}));
+app.options('*', cors({
+  origin: 'https://mgkdn9.github.io',
+  credentials: true,
 }));
 
 
