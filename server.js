@@ -54,6 +54,7 @@ const app = express()
 // 	cors()
 // )
 console.log('CORS ENV:', process.env.CLIENT_ORIGIN);
+console.log('Running Node.js version:', process.version);
 
 app.use(cors({
   origin: 'https://mgkdn9.github.io', // Allow GitHub Pages frontend
