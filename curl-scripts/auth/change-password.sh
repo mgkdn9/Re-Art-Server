@@ -1,6 +1,12 @@
 #!/bin/bash
 
-API="http://localhost:8000"
+# Determine API base URL based on hostname
+if [[ "$(hostname)" == "Users-MacBook-Pro.local" ]]; then
+  API="http://localhost:8000"
+else
+  API="https://re-art-server.onrender.com"
+fi
+
 URL_PATH="/change-password"
 
 curl "${API}${URL_PATH}/" \
