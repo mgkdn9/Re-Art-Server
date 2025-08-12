@@ -32,7 +32,6 @@ const auth = require('./lib/auth')
 // define server and client ports
 // used for cors and local port declaration
 const serverDevPort = 8000
-const clientDevPort = 3000
 
 // establish database connection
 // use new version of URL parser
@@ -48,23 +47,14 @@ mongoose.connection.once('open', ()=> {
 // instantiate express application object
 const app = express()
 
-// set CORS headers on response from this API using the `cors` NPM package
-// `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
-// app.use(
-// 	cors()
-// )
-console.log('CORS ENV:', process.env.CLIENT_ORIGIN);
-console.log('Running Node.js version:', process.version);
-
 app.use(cors({
-  origin: 'https://mgkdn9.github.io', // Allow GitHub Pages frontend
+  origin: ['https://mgkdn9.github.io', 'http://localhost:3000'],// Allow GitHub Pages frontend and localhost
   credentials: true, // Optional: if you use cookies/auth
 }));
-app.options('*', cors({
-  origin: 'https://mgkdn9.github.io',
-  credentials: true,
-}));
-
+// app.options('*', cors({
+//   origin: 'https://mgkdn9.github.io',
+//   credentials: true,
+// }));
 
 // define port for API to run on
 // adding PORT= to your env file will be necessary for deployment
@@ -148,7 +138,7 @@ app.get('/', (req, res) => {
 	res.send('Stripe Integration Server');
 });
 
-// run API on designated port (4741 in this case)
+// run API on designated port 
 app.listen(port, () => {
 	console.log('listening on port ' + port)
 })
