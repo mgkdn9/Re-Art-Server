@@ -14,7 +14,6 @@ Tag.find()
   // we want to convert each one to a POJO, so we use `.map` to
   // apply `.toObject` to each one
   foundTags =  tags.map((tag) => tag.toObject())
-  // console.log('FoundTags:',foundTags)
   
   const pieces = [
     //Impressionist

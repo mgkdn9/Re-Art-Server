@@ -109,7 +109,6 @@ app.post('/pay', async (request, response) => {
 		confirmation_method: 'manual',
 		confirm: true
 	  })
-	  console.log(intent);
 	  // Send the response to the client
 	  response.send(generateResponse(intent));
 	} catch (e) {
