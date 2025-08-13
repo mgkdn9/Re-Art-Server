@@ -51,10 +51,11 @@ app.use(cors({
   origin: ['https://mgkdn9.github.io', 'http://localhost:3000'],// Allow GitHub Pages frontend and localhost
   credentials: true, // Optional: if you use cookies/auth
 }));
-// app.options('*', cors({
-//   origin: 'https://mgkdn9.github.io',
-//   credentials: true,
-// }));
+app.options('*', cors({
+  origin: ['https://mgkdn9.github.io', 'http://localhost:3000'],
+  credentials: true,
+}));
+
 
 // define port for API to run on
 // adding PORT= to your env file will be necessary for deployment
